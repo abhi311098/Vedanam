@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:background="#ffffff"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".teacher.ProfileStudent">
+
+        <LinearLayout
+            android:layout_marginBottom="50dp"
+            android:orientation="vertical"
+            android:background="@drawable/background"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageteacher"
+                app:civ_border_width="1dp"
+                app:civ_border_color="#FF000000"
+                android:layout_margin="50dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:src="@drawable/stayinformed"/>
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:background="#ffffff"
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:id="@+id/nameteacher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Full Name" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:background="#ffffff"
+                    android:drawablePadding="10dp"
+                    android:padding="10dp"
+                    android:layout_margin="10dp"
+                    android:id="@+id/housenumberteacher"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/flat_house_no_building_apartment" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:background="#ffffff"
+                    android:drawablePadding="10dp"
+                    android:padding="10dp"
+                    android:layout_margin="10dp"
+                    android:id="@+id/streetnumberteacher"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/area_colony_street_no_sector" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/landmarkteacher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="#ffffff"
+                android:drawablePadding="10dp"
+                android:hint="@string/landmark_e_g_near_apollo_hospital"
+                android:padding="10dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/arealocalityteacher"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="#ffffff"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/town_city_with_state"
+                    android:padding="10dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/pincodeteacher"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="#ffffff"
+                    android:drawablePadding="10dp"
+                    android:hint="PIN code"
+                    android:padding="10dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:background="#ffffff"
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:id="@+id/emailteacher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:background="#ffffff"
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:id="@+id/numberteacher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/phone_number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:layout_margin="10dp"
+            android:textSize="16sp"
+            android:text="submit"
+            android:id="@+id/profileteacher"
+            android:background="@drawable/button_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>

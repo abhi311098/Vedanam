@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Vedanam</string>
+    <string name="please_wait">Please Wait...</string>
+    <string name="flat_house_no_building_apartment">Flat, House no., Building, Apartment</string>
+    <string name="area_colony_street_no_sector">Area, Colony, Street no., Sector</string>
+    <string name="landmark_e_g_near_apollo_hospital">Landmark e.g. near Apollo Hospital</string>
+    <string name="town_city_with_state">Town/City with State</string>
+    <string name="pin_code">PIN code</string>
+    <string name="enter_your_teaching_subject_or_classes">Enter Your Teaching Subject or classes</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="email">Email</string>
+    <string name="full_name">Full Name</string>
+    <string name="join_the_class">join the class</string>
+</resources>
