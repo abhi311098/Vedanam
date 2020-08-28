@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "269428687810",
+    "firebase_url": "https://abhisecond31.firebaseio.com",
+    "project_id": "abhisecond31",
+    "storage_bucket": "abhisecond31.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:269428687810:android:8e77306f207de2c5bdcc5b",
+        "android_client_info": {
+          "package_name": "com.abhi.vedanam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "269428687810-8qcdcid8iptu9j4etgj2umhebmv97ppd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3FjH-FQel9yamlBEgVPueZ7rIZkol968"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "269428687810-8qcdcid8iptu9j4etgj2umhebmv97ppd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

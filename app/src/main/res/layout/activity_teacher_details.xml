@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#9FEAE5E5"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="10dp"
+            app:cardMaxElevation="2dp"
+            app:cardUseCompatPadding="true"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:src="@mipmap/ic_launcher_round"
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="#FF000000"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="center"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"/>
+
+                <TextView
+                    android:id="@+id/teachername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/black"
+                    android:paddingLeft="10dp"/>
+
+                <TextView
+                    android:id="@+id/teachercoachingname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/black"
+                    android:paddingLeft="10dp"/>
+
+                <TextView
+                    android:id="@+id/teacheraddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/black"
+                    android:paddingLeft="10dp"/>
+
+                <TextView
+                    android:id="@+id/teachersubject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/black"
+                    android:paddingLeft="10dp"/>
+
+                <TextView
+                    android:id="@+id/teacheremailandnumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/black"
+                    android:paddingLeft="10dp"/>
+
+                <Button
+                    android:onClick="querywithteacher"
+                    android:text="query with teacher"
+                    android:textSize="14sp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/query_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:onClick="chatroom"
+                    android:text="@string/join_the_class"
+                    android:background="@drawable/join_button"
+                    android:textSize="14sp"
+                    android:layout_margin="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </RelativeLayout>
+
+</ScrollView>
