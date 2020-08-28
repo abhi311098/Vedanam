@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.abhi.vedanam.R;
 import com.abhi.vedanam.teacher.HomeTeacher;
+import com.abhi.vedanam.teacher.ProfileTeacher;
 import com.abhi.vedanam.teacher.RegistrationPageTeacher;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -41,6 +42,7 @@ public class RegistrationPageStudent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_page_student);
 
+        progressDialog = new ProgressDialog(RegistrationPageStudent.this);
         remail = findViewById(R.id.registrationemail);
         rpassword = findViewById(R.id.registrationpassword);
         rcpassword = findViewById(R.id.registrationpconfirmassword);

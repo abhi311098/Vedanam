@@ -47,11 +47,10 @@ public class DataAdapter extends FirebaseRecyclerAdapter<Realtimedata, DataAdapt
     public Myviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item,parent,false);
-
          return new Myviewholder(view);
     }
 
-    class Myviewholder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class Myviewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
          ImageView teacherimage;
          TextView teachername,cname,teacheraddress,teachersub;

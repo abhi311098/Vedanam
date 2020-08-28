@@ -52,33 +52,59 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 SharedPreferences sharedPreferences = getSharedPreferences("impkey", Context.MODE_PRIVATE);
                 final String impkey = sharedPreferences.getString("key", null);
+
+                if (impkey == null) {
+
+                    GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                            .requestIdToken(getString(R.string.default_web_client_id))
+                            .requestEmail()
+                            .build();
+                    GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(MainActivity.this, gso);
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    mAuth.signOut();
+                    mGoogleSignInClient.signOut().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            SharedPreferences sharedPreferences = getSharedPreferences("impkey", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor;
+                            editor = sharedPreferences.edit();
+                            editor.clear();
+                            editor.commit();
+                            Toast.makeText(MainActivity.this, "done", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(MainActivity.this, Verify.class);
+                            startActivity(i);
+                        }
+                    });
+                }
+
                 FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Log.e("checking", "" + user);
-                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference reference = database.getReference("teacher").child(impkey);
-                    reference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            String loginkey = snapshot.child("impkey").getValue(String.class);
-                            if (snapshot.exists()) {
-                                if (loginkey != null && loginkey.equals(impkey)) {
-                                    Intent intent = new Intent(MainActivity.this, HomeTeacher.class);
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference reference = database.getReference("teacher").child(impkey);
+                        reference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                String loginkey = snapshot.child("impkey").getValue(String.class);
+                                if (snapshot.exists()) {
+                                    if (loginkey != null && loginkey.equals(impkey)) {
+                                        Intent intent = new Intent(MainActivity.this, HomeTeacher.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                } else {
+                                    Intent intent = new Intent(MainActivity.this, HomeStudent.class);
                                     startActivity(intent);
                                     finish();
                                 }
-                            } else {
-                                Intent intent = new Intent(MainActivity.this, HomeStudent.class);
-                                startActivity(intent);
-                                finish();
                             }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
 
-                        }
-                    });
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
 
                 } else {
                     GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

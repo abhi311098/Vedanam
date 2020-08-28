@@ -12,6 +12,34 @@ public class Student implements Serializable {
     String pin;
     String email;
     String number;
+    String uid;
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentname='" + studentname + '\'' +
+                ", house='" + house + '\'' +
+                ", area='" + area + '\'' +
+                ", landmark='" + landmark + '\'' +
+                ", city='" + city + '\'' +
+                ", pin='" + pin + '\'' +
+                ", email='" + email + '\'' +
+                ", number='" + number + '\'' +
+                ", uid='" + uid + '\'' +
+                '}';
+    }
+
+    public Student(){
+
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public String getStudentname() {
         return studentname;

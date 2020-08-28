@@ -1,4 +1,4 @@
-package com.abhi.vedanam.student;
+package com.abhi.vedanam.teacher;
 
 import android.Manifest;
 import android.app.Activity;
@@ -27,7 +27,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.abhi.vedanam.R;
-import com.abhi.vedanam.model.Student;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -49,20 +48,20 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.HashMap;
 
-public class ProfileStudent extends AppCompatActivity {
+public class ProfileTeacher extends AppCompatActivity {
 
     ProgressDialog progressDialog;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-    ImageView imageStudent;
-    EditText nameStudent1, housenumberStudent, streetnumberStudent, arealocalityStudent,
-            landmarkStudent, pincodeStudent, emailStudent, numberStudent;
-    Button studentbutton;
+    ImageView imageTeacher;
+    EditText nameTeacher, housenumberTeacher, streetnumberTeacher, arealocalityTeacher,
+            landmarkTeacher, pincodeTeacher, emailTeacher, numberTeacher, coaching, subject;
+    Button teacherbutton;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mAuth.getCurrentUser();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("StudentProfile").child(user.getUid());
+    DatabaseReference myRef = database.getReference("TeacherProfile").child(user.getUid());
     String permissions[] = {Manifest.permission.READ_EXTERNAL_STORAGE};
     private StorageReference mStorageRef  = FirebaseStorage.getInstance().getReference();
     byte bb[];
@@ -70,72 +69,84 @@ public class ProfileStudent extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_student);
+        setContentView(R.layout.activity_profile_teacher);
 
-        progressDialog = new ProgressDialog(ProfileStudent.this);
-        imageStudent = findViewById(R.id.imagestudent);
-        nameStudent1 = findViewById(R.id.namestudent);
-        housenumberStudent = findViewById(R.id.housenumberstudent);
-        streetnumberStudent = findViewById(R.id.streetnumberstudent);
-        arealocalityStudent = findViewById(R.id.arealocalitystudent);
-        landmarkStudent = findViewById(R.id.landmarkstudent);
-        pincodeStudent = findViewById(R.id.pincodestudent);
-        emailStudent = findViewById(R.id.emailstudent);
-        numberStudent = findViewById(R.id.numberstudent);
-        studentbutton = findViewById(R.id.profilestudent);
+        progressDialog = new ProgressDialog(ProfileTeacher.this);
+        imageTeacher = findViewById(R.id.imageteacher);
+        nameTeacher = findViewById(R.id.nameteacher);
+        coaching = findViewById(R.id.coachingname);
+        subject = findViewById(R.id.subjectclass);
+        housenumberTeacher = findViewById(R.id.housenumberteacher);
+        streetnumberTeacher = findViewById(R.id.streetnumberteacher);
+        arealocalityTeacher = findViewById(R.id.arealocalityteacher);
+        landmarkTeacher = findViewById(R.id.landmarkteacher);
+        pincodeTeacher = findViewById(R.id.pincodeteacher);
+        emailTeacher = findViewById(R.id.emailteacher);
+        numberTeacher = findViewById(R.id.numberteacher);
+        teacherbutton = findViewById(R.id.profileteacher);
 
-        preferences = getSharedPreferences("StudentProfileDetails", Context.MODE_PRIVATE);
+        preferences = getSharedPreferences("TeacherProfileDetails", Context.MODE_PRIVATE);
         editor = preferences.edit();
 
-        String s_name = preferences.getString("student_name", null);
-        String s_house = preferences.getString("student_house", null);
-        String s_street = preferences.getString("student_street", null);
-        String s_area = preferences.getString("student_area", null);
-        String s_landmark = preferences.getString("student_landmark", null);
-        String s_pincode = preferences.getString("student_pincode", null);
-        String s_email = preferences.getString("student_email", null);
-        String s_number = preferences.getString("student_number", null);
+        String t_name = preferences.getString("teacher_name", null);
+        String t_coaching = preferences.getString("teacher_coaching", null);
+        String t_subject = preferences.getString("teacher_subject", null);
+        String t_house = preferences.getString("teacher_house", null);
+        String t_street = preferences.getString("teacher_street", null);
+        String t_area = preferences.getString("teacher_area", null);
+        String t_landmark = preferences.getString("teacher_landmark", null);
+        String t_pincode = preferences.getString("teacher_pincode", null);
+        String t_email = preferences.getString("teacher_email", null);
+        String t_number = preferences.getString("teacher_number", null);
 
-        if (s_name!=null&& s_house != null && s_street != null && s_area != null && s_landmark != null
-                && s_pincode != null&&s_email!=null&&s_number!=null){
-            nameStudent1.setText(s_name);
-            housenumberStudent.setText(s_house);
-            streetnumberStudent.setText(s_street);
-            arealocalityStudent.setText(s_area);
-            landmarkStudent.setText(s_landmark);
-            pincodeStudent.setText(s_pincode);
-            emailStudent.setText(s_email);
-            numberStudent.setText(s_number);
+        if (t_name!=null&& t_coaching!=null&& t_subject!=null&& t_house != null && t_street != null && t_area != null && t_landmark != null
+                && t_pincode != null&&t_email!=null&&t_number!=null){
+            nameTeacher.setText(t_name);
+            coaching.setText(t_coaching);
+            subject.setText(t_subject);
+            housenumberTeacher.setText(t_house);
+            streetnumberTeacher.setText(t_street);
+            arealocalityTeacher.setText(t_area);
+            landmarkTeacher.setText(t_landmark);
+            pincodeTeacher.setText(t_pincode);
+            emailTeacher.setText(t_email);
+            numberTeacher.setText(t_number);
         } else {
             myRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    String student_name = snapshot.child("" + "student_name").getValue(String.class);
-                    nameStudent1.setText(student_name);
-                    String student_house = snapshot.child("student_house").getValue(String.class);
-                    housenumberStudent.setText(student_house);
-                    String student_street = snapshot.child("student_street").getValue(String.class);
-                    streetnumberStudent.setText(student_street);
-                    String student_area = snapshot.child("student_area").getValue(String.class);
-                    arealocalityStudent.setText(student_area);
-                    String student_land = snapshot.child("student_land").getValue(String.class);
-                    landmarkStudent.setText(student_land);
-                    String student_pincode = snapshot.child("student_pincode").getValue(String.class);
-                    pincodeStudent.setText(student_pincode);
-                    String student_email = snapshot.child("student_email").getValue(String.class);
-                    emailStudent.setText(student_email);
-                    String student_number = snapshot.child("student_number").getValue(String.class);
-                    numberStudent.setText(student_number);
+                    String teacher_name = snapshot.child("" + "teacher_name").getValue(String.class);
+                    nameTeacher.setText(teacher_name);
+                    String teacher_coaching = snapshot.child("" + "teacher_coaching").getValue(String.class);
+                    nameTeacher.setText(teacher_coaching);
+                    String teacher_subject = snapshot.child("" + "teacher_subject").getValue(String.class);
+                    nameTeacher.setText(teacher_subject);
+                    String teacher_house = snapshot.child("teacher_house").getValue(String.class);
+                    housenumberTeacher.setText(teacher_house);
+                    String teacher_street = snapshot.child("teacher_street").getValue(String.class);
+                    streetnumberTeacher.setText(teacher_street);
+                    String teacher_area = snapshot.child("teacher_area").getValue(String.class);
+                    arealocalityTeacher.setText(teacher_area);
+                    String teacher_land = snapshot.child("teacher_land").getValue(String.class);
+                    landmarkTeacher.setText(teacher_land);
+                    String teacher_pincode = snapshot.child("teacher_pincode").getValue(String.class);
+                    pincodeTeacher.setText(teacher_pincode);
+                    String teacher_email = snapshot.child("teacher_email").getValue(String.class);
+                    emailTeacher.setText(teacher_email);
+                    String teacher_number = snapshot.child("teacher_number").getValue(String.class);
+                    numberTeacher.setText(teacher_number);
 
-                    editor.putString("student_name", student_name);
-                    editor.putString("student_house", student_house);
-                    editor.putString("student_street", student_street);
-                    editor.putString("student_area", student_area);
-                    editor.putString("student_land", student_land);
-                    editor.putString("student_pincode", student_pincode);
-                    editor.putString("student_email", student_email);
-                    editor.putString("student_number", student_number);
+                    editor.putString("teacher_name", teacher_name);
+                    editor.putString("teacher_coaching", teacher_coaching);
+                    editor.putString("teacher_subject", teacher_subject);
+                    editor.putString("teacher_house", teacher_house);
+                    editor.putString("teacher_street", teacher_street);
+                    editor.putString("teacher_area", teacher_area);
+                    editor.putString("teacher_land", teacher_land);
+                    editor.putString("teacher_pincode", teacher_pincode);
+                    editor.putString("teacher_email", teacher_email);
+                    editor.putString("teacher_number", teacher_number);
                     editor.commit();
                 }
 
@@ -149,22 +160,22 @@ public class ProfileStudent extends AppCompatActivity {
         functionpermission();
         setImage();
 
-        imageStudent.setOnClickListener(new View.OnClickListener() {
+        imageTeacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressDialog.setCancelable(false);
                 progressDialog.show();
                 progressDialog.setContentView(R.layout.progress_dialog_view);
                 progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, 101);
             }
         });
 
-            studentbutton.setOnClickListener(new View.OnClickListener() {
+            teacherbutton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    profilestudent();
+                    profileteacher();
                 }
             });
     }
@@ -183,19 +194,19 @@ public class ProfileStudent extends AppCompatActivity {
                 String picturePath = c.getString(columnIndex);
                 c.close();
                 Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-                imageStudent.setImageBitmap(thumbnail);
+                imageTeacher.setImageBitmap(thumbnail);
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                 thumbnail.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
                 bb = bytes.toByteArray();
 
                 if (bb != null) {
-                    StorageReference storageReference = mStorageRef.child("Vedanamstudent/profilepic/"+user.getUid()+".jpg");
+                    StorageReference storageReference = mStorageRef.child("Vedanamteacher/profilepic/"+user.getUid()+".jpg");
                     storageReference.putBytes(bb).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                             if (task.isSuccessful()){
                                 Log.e("jello","hello");
-                                StorageReference storageReference = mStorageRef.child("Vedanamstudent/profilepic/"+user.getUid()+".jpg");
+                                StorageReference storageReference = mStorageRef.child("Vedanamteacher/profilepic/"+user.getUid()+".jpg");
                                 Log.e("success",storageReference+"");
                                 final long SIZE = 1024 * 1024 * 15;
                                 storageReference.getBytes(SIZE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
@@ -204,7 +215,7 @@ public class ProfileStudent extends AppCompatActivity {
                                         Log.e("success",bytes.length+"");
                                         try {
                                             File root = Environment.getExternalStorageDirectory();
-                                            File folder = new File(root, "VedanamStudent");
+                                            File folder = new File(root, "VedanamTeacher");
                                             //if (!folder.exists()) {
                                                 folder.mkdir();
                                             //}
@@ -222,9 +233,9 @@ public class ProfileStudent extends AppCompatActivity {
                                     }
                                 });
                                 progressDialog.dismiss();
-                                Toast.makeText(ProfileStudent.this, "Successfully Upload", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProfileTeacher.this, "Successfully Upload", Toast.LENGTH_SHORT).show();
                             }else{
-                                Toast.makeText(ProfileStudent.this, "Upload Failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProfileTeacher.this, "Upload Failed", Toast.LENGTH_SHORT).show();
                             }
 
                         }
@@ -236,86 +247,97 @@ public class ProfileStudent extends AppCompatActivity {
     }
 
     private void setImage() {
-        StorageReference storageReference = mStorageRef.child("Vedanamstudent/profilepic/"+user.getUid()+".jpg");
+        StorageReference storageReference = mStorageRef.child("Vedanamteacher/profilepic/"+user.getUid()+".jpg");
         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Glide.with(ProfileStudent.this).load(uri).into(imageStudent);
+                Glide.with(ProfileTeacher.this).load(uri).into(imageTeacher);
             }
         });
     }
 
     public void functionpermission()
     {
-        if (ActivityCompat.checkSelfPermission(ProfileStudent.this,permissions[0])!= PackageManager.PERMISSION_GRANTED)
+        if (ActivityCompat.checkSelfPermission(ProfileTeacher.this,permissions[0])!= PackageManager.PERMISSION_GRANTED)
         {
-            ActivityCompat.requestPermissions(ProfileStudent.this,permissions,2);
+            ActivityCompat.requestPermissions(ProfileTeacher.this,permissions,2);
         }
         else
         {
-            Toast.makeText(ProfileStudent.this, "", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProfileTeacher.this, "", Toast.LENGTH_SHORT).show();
         }
     }
-    public void profilestudent() {
+    public void profileteacher() {
 
-        String sname = nameStudent1.getText().toString();
-        String shouse = housenumberStudent.getText().toString();
-        String sstreet = streetnumberStudent.getText().toString();
-        String sarea = arealocalityStudent.getText().toString();
-        String sland = landmarkStudent.getText().toString();
-        String spincode = pincodeStudent.getText().toString();
-        String semail = emailStudent.getText().toString();
-        String snumber = numberStudent.getText().toString();
+        String tname = nameTeacher.getText().toString();
+        String tcoaching = coaching.getText().toString();
+        String tsubject = subject.getText().toString();
+        String thouse = housenumberTeacher.getText().toString();
+        String tstreet = streetnumberTeacher.getText().toString();
+        String tarea = arealocalityTeacher.getText().toString();
+        String tland = landmarkTeacher.getText().toString();
+        String tpincode = pincodeTeacher.getText().toString();
+        String temail = emailTeacher.getText().toString();
+        String tnumber = numberTeacher.getText().toString();
 
-        if(sname.isEmpty()) {
+        if(tname.isEmpty()) {
             Toast.makeText(getApplicationContext(),"Enter Your Name ",Toast.LENGTH_SHORT).show();
-        }else if (shouse.equals("")) {
+        } else if(tcoaching.isEmpty()) {
+            Toast.makeText(getApplicationContext(),"Enter Your Coaching Name ",Toast.LENGTH_SHORT).show();
+        } else if(tsubject.isEmpty()) {
+            Toast.makeText(getApplicationContext(),"Enter Your subject ",Toast.LENGTH_SHORT).show();
+        }else if (thouse.equals("")) {
             Toast.makeText(getApplicationContext(), "Enter Your House Number ", Toast.LENGTH_SHORT).show();
-        } else if (sstreet.equals("")) {
+        } else if (tstreet.equals("")) {
             Toast.makeText(getApplicationContext(), "Enter Your Street/Building/Block ", Toast.LENGTH_SHORT).show();
-        } else if (sarea.equals("")) {
+        } else if (tarea.equals("")) {
             Toast.makeText(getApplicationContext(), "Enter Your Area/Locality Name ", Toast.LENGTH_SHORT).show();
-        } else if (sland.equals("")) {
+        } else if (tland.equals("")) {
             Toast.makeText(getApplicationContext(), "Enter Your Landmark ", Toast.LENGTH_SHORT).show();
-        } else if (spincode.equals("")) {
+        } else if (tpincode.equals("")) {
             Toast.makeText(getApplicationContext(), "Enter Your Pincode ", Toast.LENGTH_SHORT).show();
-        }else if(semail.equals("")){
+        }else if(temail.equals("")){
             Toast.makeText(getApplicationContext(),"Enter Your Email ",Toast.LENGTH_SHORT).show();
-        }else if (!semail.matches(emailPattern)) {
+        }else if (!temail.matches(emailPattern)) {
             Toast.makeText(getApplicationContext(),"Enter Valid Email Address",Toast.LENGTH_SHORT).show();
-        }else if(snumber.equals("")){
+        }else if(tnumber.equals("")){
             Toast.makeText(getApplicationContext(),"Enter Your Number ",Toast.LENGTH_SHORT).show();
         }else{
-            editor.putString("student_name", sname);
-            editor.putString("student_house", shouse);
-            editor.putString("student_street", sstreet);
-            editor.putString("student_area", sarea);
-            editor.putString("student_land", sland);
-            editor.putString("student_pincode", spincode);
-            editor.putString("student_email", semail);
-            editor.putString("student_number", snumber);
+            editor.putString("teacher_name", tname);
+            editor.putString("teacher_coaching", tcoaching);
+            editor.putString("teacher_subject", tsubject);
+            editor.putString("teacher_house", thouse);
+            editor.putString("teacher_street", tstreet);
+            editor.putString("teacher_area", tarea);
+            editor.putString("teacher_land", tland);
+            editor.putString("teacher_pincode", tpincode);
+            editor.putString("teacher_email", temail);
+            editor.putString("teacher_number", tnumber);
             editor.commit();
-            Toast.makeText(this, "" + sname, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "" + tname, Toast.LENGTH_SHORT).show();
 
             HashMap<String, Object> hashMap = new HashMap<>();
-            hashMap.put("student_name", sname);
-            hashMap.put("student_house", shouse);
-            hashMap.put("student_street", sstreet);
-            hashMap.put("student_area", sarea);
-            hashMap.put("student_land", sland);
-            hashMap.put("student_pincode", spincode);
-            hashMap.put("student_email", semail);
-            hashMap.put("student_number", snumber);
+            hashMap.put("teacher_uid", user.getUid());
+            hashMap.put("teacher_name", tname);
+            hashMap.put("teacher_coaching", tcoaching);
+            hashMap.put("teacher_subject", tsubject);
+            hashMap.put("teacher_house", thouse);
+            hashMap.put("teacher_street", tstreet);
+            hashMap.put("teacher_area", tarea);
+            hashMap.put("teacher_land", tland);
+            hashMap.put("teacher_pincode", tpincode);
+            hashMap.put("teacher_email", temail);
+            hashMap.put("teacher_number", tnumber);
 
             myRef.setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-                    Toast.makeText(ProfileStudent.this, "Successfully Updated" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProfileTeacher.this, "Successfully Updated" , Toast.LENGTH_SHORT).show();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Log.d("profilestudent", e.getMessage());
+                    Log.d("profileteacher", e.getMessage());
                 }
             });
         }

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
         android:orientation="vertical"
         android:background="#ffffff"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".teacher.ProfileStudent">
@@ -45,6 +45,36 @@
                 android:layout_height="wrap_content"
                 android:hint="Full Name" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:background="#ffffff"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:id="@+id/coachingname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Coaching Name" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:background="#ffffff"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:id="@+id/subjectclass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Your Teaching Subject or Classes" />
+    </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -136,30 +166,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:background="#ffffff"
-                android:drawablePadding="10dp"
-                android:padding="10dp"
-                android:layout_margin="10dp"
-                android:id="@+id/emailteacher"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/email" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <EditText
+            android:id="@+id/emailteacher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="#ffffff"
+            android:drawablePadding="10dp"
+            android:hint="@string/email"
+            android:padding="10dp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
-                android:background="#ffffff"
-                android:drawablePadding="10dp"
-                android:padding="10dp"
-                android:layout_margin="10dp"
                 android:id="@+id/numberteacher"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/phone_number" />
+                android:layout_margin="10dp"
+                android:background="#ffffff"
+                android:drawablePadding="10dp"
+                android:hint="@string/phone_number"
+                android:padding="10dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
